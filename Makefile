@@ -1,6 +1,17 @@
+dirs = $(HOME)/.vim/colors $(HOME)/.vim-tmp
 files = .vimrc .bash_logout
 
-.PHONY : install
 install :
-	mkdir -p $(HOME)/.vim-tmp
+
+.PHONY : mkdirs cpfiles vimcolors install
+mkdirs : $(dirs)
+	mkdir -p $^
+
+cpfiles :
 	cp $(files) $(HOME)
+
+vimcolors :
+	wget -O $(HOME)/.vim/colors/zenburn.vim http://slinky.imukuppi.org/zenburn/zenburn.vim
+
+install : mkdirs cpfiles vimcolors
+	# Happy shelling ...
